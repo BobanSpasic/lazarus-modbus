@@ -1,0 +1,330 @@
+object frmMain: TfrmMain
+  Left = 568
+  Height = 725
+  Top = 124
+  Width = 948
+  BorderWidth = 8
+  Caption = 'Modbus/TCP Master'
+  ClientHeight = 725
+  ClientWidth = 948
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Consolas'
+  Font.Pitch = fpFixed
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  object pnlInput: TPanel
+    Left = 8
+    Height = 50
+    Top = 8
+    Width = 932
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 932
+    ParentBackground = False
+    TabOrder = 0
+    object btnStart: TBitBtn
+      Left = 4
+      Height = 28
+      Top = 16
+      Width = 49
+      AutoSize = True
+      Caption = 'Start'
+      TabOrder = 0
+      OnClick = btnStartClick
+    end
+    object sePort: TSpinEdit
+      AnchorSideLeft.Control = IPEdit1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = btnStart
+      AnchorSideTop.Side = asrCenter
+      Left = 223
+      Height = 26
+      Top = 17
+      Width = 70
+      BorderSpacing.Left = 20
+      TabOrder = 1
+      Value = 502
+    end
+    object seUnitID: TSpinEdit
+      AnchorSideLeft.Control = sePort
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = sePort
+      AnchorSideTop.Side = asrCenter
+      Left = 313
+      Height = 26
+      Top = 17
+      Width = 70
+      BorderSpacing.Left = 20
+      TabOrder = 2
+      Value = 190
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = sePort
+      AnchorSideTop.Control = sePort
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Control = sePort
+      Left = 223
+      Height = 14
+      Top = 3
+      Width = 28
+      Anchors = [akLeft, akBottom]
+      Caption = 'Port'
+    end
+    object Label4: TLabel
+      AnchorSideLeft.Control = seUnitID
+      AnchorSideTop.Control = seUnitID
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Control = seUnitID
+      Left = 313
+      Height = 14
+      Top = 3
+      Width = 42
+      Anchors = [akLeft, akBottom]
+      Caption = 'UnitID'
+    end
+    object cbLogEnabled: TCheckBox
+      AnchorSideLeft.Control = cbZeroBased
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = cbZeroBased
+      AnchorSideTop.Side = asrCenter
+      Left = 669
+      Height = 23
+      Top = 19
+      Width = 47
+      BorderSpacing.Left = 50
+      Caption = 'Log'
+      Checked = True
+      State = cbChecked
+      TabOrder = 3
+      OnChange = cbLogEnabledChange
+    end
+    object IPEdit1: TIPEdit
+      AnchorSideLeft.Control = btnStart
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = btnStart
+      AnchorSideTop.Side = asrCenter
+      Left = 73
+      Height = 26
+      Top = 17
+      Width = 130
+      BorderSpacing.Left = 20
+      TabOrder = 4
+      Text = '192.168.  1.100'
+    end
+    object Label5: TLabel
+      AnchorSideLeft.Control = IPEdit1
+      AnchorSideTop.Control = IPEdit1
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Control = IPEdit1
+      Left = 73
+      Height = 14
+      Top = 3
+      Width = 14
+      Anchors = [akLeft, akBottom]
+      Caption = 'IP'
+    end
+    object seCycle: TSpinEdit
+      AnchorSideLeft.Control = seUnitID
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = seUnitID
+      AnchorSideTop.Side = asrCenter
+      Left = 403
+      Height = 26
+      Top = 17
+      Width = 70
+      BorderSpacing.Left = 20
+      TabOrder = 5
+      Value = 10
+    end
+    object Label6: TLabel
+      AnchorSideLeft.Control = seCycle
+      AnchorSideTop.Control = seCycle
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Control = seCycle
+      Left = 403
+      Height = 14
+      Top = 3
+      Width = 84
+      Anchors = [akLeft, akBottom]
+      Caption = 'Cycle (sek.)'
+    end
+    object cbZeroBased: TCheckBox
+      AnchorSideLeft.Control = seCycle
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = seCycle
+      AnchorSideTop.Side = asrCenter
+      Left = 523
+      Height = 23
+      Top = 19
+      Width = 96
+      BorderSpacing.Left = 50
+      Caption = 'Zero based'
+      Checked = True
+      State = cbChecked
+      TabOrder = 6
+    end
+  end
+  object pnlMain: TPanel
+    Left = 8
+    Height = 659
+    Top = 58
+    Width = 932
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 659
+    ClientWidth = 932
+    ParentBackground = False
+    TabOrder = 1
+    object Splitter1: TSplitter
+      Cursor = crVSplit
+      Left = 0
+      Height = 8
+      Top = 545
+      Width = 932
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+    object sgdRegisters: TStringGrid
+      Left = 0
+      Height = 545
+      Top = 0
+      Width = 932
+      Align = alClient
+      AutoFillColumns = True
+      ColCount = 4
+      ColumnClickSorts = True
+      Columns = <      
+        item
+          Title.Caption = 'RegisterNr.'
+          Width = 233
+        end      
+        item
+          PickList.Strings = (
+            '01 Read Coils'
+            '02 Read Discrete Inputs'
+            '03 Read Holding Register'
+            '04 Read Input Register'
+            '05 Write Single Coil'
+            '06 Write Holding Register'
+          )
+          Title.Caption = 'Function'
+          Width = 233
+        end      
+        item
+          PickList.Strings = (
+            'FALSE'
+            'TRUE'
+          )
+          Title.Caption = 'Value'
+          Width = 232
+        end      
+        item
+          Title.Caption = 'Response'
+          Width = 232
+        end>
+      DefaultColWidth = 90
+      DefaultRowHeight = 18
+      FixedCols = 0
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Consolas'
+      Font.Pitch = fpFixed
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAutoAddRows, goThumbTracking, goAutoAddRowsSkipContentCheck]
+      ParentFont = False
+      PopupMenu = PopupMenu1
+      RowCount = 2
+      ScrollBars = ssAutoVertical
+      TabOrder = 0
+      ColWidths = (
+        233
+        233
+        232
+        232
+      )
+    end
+    object mmoErrorLog: TMemo
+      Left = 0
+      Height = 106
+      Top = 553
+      Width = 932
+      Align = alBottom
+      ScrollBars = ssAutoBoth
+      TabOrder = 1
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 768
+    Top = 8
+    object mnuFile: TMenuItem
+      Caption = 'File'
+      object mnuOpen: TMenuItem
+        Caption = 'Open'
+        OnClick = mnuOpenClick
+      end
+      object mnuSave: TMenuItem
+        Caption = 'Save'
+        OnClick = mnuSaveClick
+      end
+      object mnuLine: TMenuItem
+        Caption = '-'
+      end
+      object mnuQuit: TMenuItem
+        Caption = 'Quit'
+        OnClick = mnuQuitClick
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.xml'
+    Filter = '*.xml|*.xml'
+    Left = 800
+    Top = 8
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.xml'
+    Filter = '*.xml|*.xml'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    Left = 848
+    Top = 8
+  end
+  object mclPLC: TIdModBusClient
+    OnStatus = mclPLCStatus
+    OnDisconnected = mclPLCDisconnected
+    OnConnected = mclPLCConnected
+    ConnectTimeout = 0
+    BaseRegister = 0
+    OnResponseError = mclPLCResponseError
+    OnResponseMismatch = mclPLCResponseMismatch
+    Left = 888
+    Top = 8
+  end
+  object tmCycle: TTimer
+    Enabled = False
+    OnTimer = tmCycleTimer
+    Left = 720
+    Top = 8
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 886
+    Top = 111
+    object mniAddRow: TMenuItem
+      Caption = 'Add row'
+      OnClick = mniAddRowClick
+    end
+    object mniDeleteRow: TMenuItem
+      Caption = 'Delete row'
+      OnClick = mniDeleteRowClick
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object mniClearList: TMenuItem
+      Caption = 'Clear list'
+      OnClick = mniClearListClick
+    end
+  end
+end
