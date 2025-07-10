@@ -213,7 +213,7 @@ begin
   try
     if ParamCount > 0 then
       case ParamStr(1) of
-        'build': BuildAll(['Indy10']);
+        'build': BuildAll(['Indy10', 'TIPEdit']);
         else
           OutLog(etError, ParamStr(1));
       end;
